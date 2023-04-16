@@ -13,9 +13,15 @@ db.customers.find({}, {username:1, name:1, birthdate:1}).sort({birthdate:1}).lim
 \\znajdź wszystkie dokumenty, posegreguj je po dacie urodzenia rosnąco, zwróć 6 pierwszych dokumentów z pominięciem 3 zawierających jedynie 3 wskazane pola (+id)
 db.customers.find({}, {username:1, name:1, birthdate:1}).sort({birthdate:1}).limit(6).skip(3)
 
-\\znajdź dokument 
+\\znajdź dokument o zadanej wartości wskazanego pola, oraz zwróć dokument zawierający jedynie wskazane pole
 db.customers.find({username:'valenciajennifer'}, {_id:0, tier_and_details:1})
-db...
+
+\\znajdź dokumenty o wartości wskazanego pola z zadanego przedziału, posegreguj je po dacie urodzenia rosnąco, zwróć dokumenty zawierające 2 wskazane pola(bez id)
+db.customers.find({birthdate:{$gte: ISODate("1980-01-01T00:00:00.000+00:00"), $lte: ISODate("1981-01-01T00:00:00.000+00:00")}}, {_id:0, name:1, birthdate:1}).sort({birthdate:1})
+
+  \\na dokumencie zagnieżdżonym
+db.theaters.find({"location.address.state": {$in: ['TX', 'PA']}}, {"location.geo":0}).limit(3)
+
 
 
 Update:
@@ -23,3 +29,6 @@ Update:
 
 
 Delete:
+
+
+Kursor - obiekt tworzony podczas wykonywania zapytania, wskazuje na zbiór zwróconych w wyniku zapytania dokumentów i filtruje je w odpowiedni sposób.
