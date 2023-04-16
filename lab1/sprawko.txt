@@ -1,0 +1,25 @@
+Create:
+
+
+
+Read:
+
+\\znajdź wszystkie dokumenty, zwróć 3 z nich
+db.accounts.find().limit(3)
+
+\\znajdź wszystkie dokumenty, posegreguj je po dacie urodzenia rosnąco, zwróć 6 pierwszych dokumentów zawierających jedynie 3 wskazane pola (+id)
+db.customers.find({}, {username:1, name:1, birthdate:1}).sort({birthdate:1}).limit(6)
+
+\\znajdź wszystkie dokumenty, posegreguj je po dacie urodzenia rosnąco, zwróć 6 pierwszych dokumentów z pominięciem 3 zawierających jedynie 3 wskazane pola (+id)
+db.customers.find({}, {username:1, name:1, birthdate:1}).sort({birthdate:1}).limit(6).skip(3)
+
+\\znajdź dokument 
+db.customers.find({username:'valenciajennifer'}, {_id:0, tier_and_details:1})
+db...
+
+
+Update:
+
+
+
+Delete:
